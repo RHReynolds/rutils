@@ -26,3 +26,5 @@ Suggests:
     sessioninfo,
     rmarkdown
 VignetteBuilder: knitr
+Imports: 
+    dplyr

@@ -72,7 +72,7 @@ Below is the citation output from using `citation('rutils')` in R. Please
 run this yourself to check for any updates on how to cite __rutils__.
 
 ```{r 'citation', eval = requireNamespace('rutils')}
-print(citation('rutils'), bibtex = TRUE)
+print(citation("rutils"), bibtex = TRUE)
 ```
 
 Please note that the `rutils` was only made possible thanks to many other R and bioinformatics software authors, which are cited either in the vignettes and/or the paper(s) describing this package.

@@ -77,7 +77,7 @@ Please run this yourself to check for any updates on how to cite
 **rutils**.
 
 ``` r
-print(citation('rutils'), bibtex = TRUE)
+print(citation("rutils"), bibtex = TRUE)
 #> 
 #> RHReynolds (2020). _Common utility functions_. doi:
 #> 10.18129/B9.bioc.rutils (URL: https://doi.org/10.18129/B9.bioc.rutils),

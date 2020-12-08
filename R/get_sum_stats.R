@@ -18,26 +18,26 @@
 #'         group_vars = "Species"
 #'     )
 get_sum_stats <- function(df,
-                          sum_vars,
-                          group_vars = NULL,
-                          sum_funcs =
-                            list(
-                              mean = base::mean,
-                              sd = stats::sd,
-                              median = stats::median,
-                              iqr = stats::IQR
-                            )) {
-  if (!is.null(group_vars)) {
-    df <- df %>%
-      dplyr::group_by_at(.vars = group_vars)
-  }
+    sum_vars,
+    group_vars = NULL,
+    sum_funcs =
+        list(
+            mean = base::mean,
+            sd = stats::sd,
+            median = stats::median,
+            iqr = stats::IQR
+        )) {
+    if (!is.null(group_vars)) {
+        df <- df %>%
+            dplyr::group_by_at(.vars = group_vars)
+    }
 
-  df_summary <- df %>%
-    dplyr::summarise_at(
-      .vars = sum_vars,
-      .funs = sum_funcs
-    ) %>%
-    dplyr::ungroup()
+    df_summary <- df %>%
+        dplyr::summarise_at(
+            .vars = sum_vars,
+            .funs = sum_funcs
+        ) %>%
+        dplyr::ungroup()
 
-  return(df_summary)
+    return(df_summary)
 }
