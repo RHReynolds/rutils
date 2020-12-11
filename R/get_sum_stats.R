@@ -1,5 +1,7 @@
 #' Calculate summary statistics
 #'
+#' @author David Zhang \url{https://github.com/dzhang32/rutils}
+#'
 #' @param df a `data.frame` object.
 #' @param sum_vars `character()` vector with name of columns to `summarize`.
 #' @param sum_funcs either function or list of functions. By default, uses

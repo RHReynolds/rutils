@@ -37,3 +37,6 @@ iris_summary <-
         group_vars = "Species"
     )
 }
+\author{
+David Zhang \url{https://github.com/dzhang32/rutils}
+}
