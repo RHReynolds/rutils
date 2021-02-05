@@ -2,4 +2,5 @@
 
 export("%>%")
 export(get_sum_stats)
+export(liftover_coord)
 importFrom(magrittr,"%>%")
