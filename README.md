@@ -3,7 +3,7 @@
 # rutils
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![BioC status](http://www.bioconductor.org/shields/build/release/bioc/rutils.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/rutils) [![R build status](https://github.com/RHReynolds/rutils/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/RHReynolds/rutils/actions) [![Codecov test coverage](https://codecov.io/gh/RHReynolds/rutils/branch/master/graph/badge.svg)](https://codecov.io/gh/RHReynolds/rutils?branch=master) <!-- badges: end -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![R build status](https://github.com/RHReynolds/rutils/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/RHReynolds/rutils/actions) [![Codecov test coverage](https://codecov.io/gh/RHReynolds/rutils/branch/master/graph/badge.svg)](https://codecov.io/gh/RHReynolds/rutils?branch=master) <!-- badges: end -->
 
 The goal of `rutils` is to house some of my commonly used functions.
 
