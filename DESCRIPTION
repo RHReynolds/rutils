@@ -27,9 +27,9 @@ Suggests:
 VignetteBuilder: knitr
 Imports: 
     dplyr,
+    GenomicRanges,
     magrittr,
     readr,
     rtracklayer,
-    GenomicRanges,
     stringr,
     tibble
