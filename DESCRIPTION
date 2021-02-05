@@ -3,12 +3,11 @@ Title: Common utility functions
 Version: 0.99.0
 Date: 2020-12-08
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Regina",
+           family = "H. Reynolds",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+           email = "regina.reynolds.16@ucl.ac.uk")
+Description: To house common utility functions.
 License: Artistic-2.0
 URL: https://github.com/RHReynolds/rutils
 BugReports: https://support.bioconductor.org/t/rutils
