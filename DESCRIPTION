@@ -1,6 +1,6 @@
 Package: rutils
 Title: Common utility functions
-Version: 0.99.0
+Version: 0.99.1
 Date: 2020-12-08
 Authors@R: 
     person(given = "Regina",
@@ -32,4 +32,8 @@ Imports:
     rtracklayer,
     GenomicRanges,
     stringr,
-    tibble
+    tibble,
+    qdapTools,
+    GOSemSim,
+    rrvgo,
+    tidyselect
