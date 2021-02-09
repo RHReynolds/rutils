@@ -4,7 +4,7 @@
 \alias{reduce_go_redundancy}
 \title{Reduce redundancy of human GO terms}
 \usage{
-reduce_go_redundancy(pathway_df, threshold, scores = NULL)
+reduce_go_redundancy(pathway_df, threshold = 0.7, scores = NULL)
 }
 \arguments{
 \item{pathway_df}{a \code{data.frame} or \link[tibble:tbl_df-class]{tibble} object,

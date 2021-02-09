@@ -81,7 +81,7 @@
 
 reduce_go_redundancy <- function(
   pathway_df,
-  threshold,
+  threshold = 0.7,
   scores = NULL) {
   
   ont <- 
