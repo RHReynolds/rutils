@@ -36,4 +36,5 @@ Imports:
     qdapTools,
     GOSemSim,
     rrvgo,
-    tidyselect
+    tidyselect,
+    org.Hs.eg.db
