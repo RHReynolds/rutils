@@ -12,7 +12,6 @@
 #' @export
 #'
 #' @examples
-#'
 #' iris_summary <-
 #'     get_sum_stats(
 #'         iris,

@@ -29,7 +29,6 @@ get_sum_stats(
 Calculate summary statistics
 }
 \examples{
-
 iris_summary <-
     get_sum_stats(
         iris,
