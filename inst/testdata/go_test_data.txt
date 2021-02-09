@@ -1,0 +1,11 @@
+go_type	go_id	go_term
+BP	GO:0061564	Axon development
+BP	GO:0010975	Regulation of neuron projection development
+BP	GO:0022604	Regulation of cell morphogenesis
+BP	GO:0050808	Synapse organization
+BP	GO:0099177	Regulation of trans-synaptic signaling
+BP	GO:0030705	Cytoskeleton-dependent intracellular transport
+BP	GO:0007272	Ensheathment of neurons
+BP	GO:0070997	Neuron death
+BP	GO:0051656	Establishment of organelle localization
+BP	GO:0051961	Negative regulation of nervous system development

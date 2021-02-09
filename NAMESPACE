@@ -3,4 +3,7 @@
 export("%>%")
 export(get_sum_stats)
 export(liftover_coord)
+export(reduce_go_redundancy)
 importFrom(magrittr,"%>%")
+importFrom(stats,setNames)
+importFrom(tidyselect,contains)
