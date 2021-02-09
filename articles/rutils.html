@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rutils</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.1</span>
       </span>
     </div>
 
@@ -79,7 +79,7 @@
       Your institution<br><a class="author_email" href="mailto:#"></a><a href="mailto:your.email@somewhere.com" class="email">your.email@somewhere.com</a>
       </address>
                   
-            <h4 class="date">5 February 2021</h4>
+            <h4 class="date">9 February 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/RHReynolds/rutils/blob/master/vignettes/rutils.Rmd"><code>vignettes/rutils.Rmd</code></a></small>
       <div class="hidden name"><code>rutils.Rmd</code></div>
@@ -106,12 +106,6 @@
 <span class="co">## Check that you have a valid Bioconductor installation</span>
 <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/valid.html">valid</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="required-knowledge" class="section level2">
-<h2 class="hasAnchor">
-<a href="#required-knowledge" class="anchor"></a>Required knowledge</h2>
-<p><em><a href="https://bioconductor.org/packages/3.12/rutils">rutils</a></em> is based on many other packages and in particular in those that have implemented the infrastructure needed for dealing with RNA-seq data (EDIT!). That is, packages like <em><a href="https://bioconductor.org/packages/3.12/SummarizedExperiment">SummarizedExperiment</a></em> (EDIT!).</p>
-<p>If you are asking yourself the question “Where do I start using Bioconductor?” you might be interested in <a href="http://lcolladotor.github.io/2014/10/16/startbioc/#.VkOKbq6rRuU">this blog post</a>.</p>
-</div>
 <div id="asking-for-help" class="section level2">
 <h2 class="hasAnchor">
 <a href="#asking-for-help" class="anchor"></a>Asking for help</h2>
@@ -128,7 +122,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; RHReynolds (2021). _Common utility functions_. doi:</span>
 <span class="co">#&gt; 10.18129/B9.bioc.rutils (URL: https://doi.org/10.18129/B9.bioc.rutils),</span>
-<span class="co">#&gt; https://github.com/RHReynolds/rutils - R package version 0.99.0, &lt;URL:</span>
+<span class="co">#&gt; https://github.com/RHReynolds/rutils - R package version 0.99.1, &lt;URL:</span>
 <span class="co">#&gt; http://www.bioconductor.org/packages/rutils&gt;.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; RHReynolds (2020). "Common utility functions." _bioRxiv_. doi:</span>
@@ -146,7 +140,6 @@
 </h1>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/RHReynolds/rutils">"rutils"</a></span><span class="op">)</span></code></pre></div>
-<p>Edit this as you see fit =)</p>
 <p>Here is an example of you can cite your package inside the vignette:</p>
 <ul>
 <li>
@@ -187,9 +180,9 @@
 <span class="fu"><a href="https://rdrr.io/r/base/files.html">file.remove</a></span><span class="op">(</span><span class="st">"rutils.bib"</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
 <p>Date the vignette was generated.</p>
-<pre><code>#&gt; [1] "2021-02-05 16:41:58 UTC"</code></pre>
+<pre><code>#&gt; [1] "2021-02-09 19:47:13 UTC"</code></pre>
 <p>Wallclock time spent generating the vignette.</p>
-<pre><code>#&gt; Time difference of 1.052 secs</code></pre>
+<pre><code>#&gt; Time difference of 1.185 secs</code></pre>
 <p><code>R</code> session information.</p>
 <pre><code>#&gt; ─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────
 #&gt;  setting  value                       
@@ -201,7 +194,7 @@
 #&gt;  collate  en_US.UTF-8                 
 #&gt;  ctype    en_US.UTF-8                 
 #&gt;  tz       Etc/UTC                     
-#&gt;  date     2021-02-05                  
+#&gt;  date     2021-02-09                  
 #&gt; 
 #&gt; ─ Packages ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 #&gt;  package       * version date       lib source                                 
@@ -211,7 +204,7 @@
 #&gt;  bookdown        0.21    2020-10-13 [1] RSPM (R 4.0.2)                         
 #&gt;  cachem          1.0.3   2021-02-04 [2] RSPM (R 4.0.3)                         
 #&gt;  cli             2.3.0   2021-01-31 [2] RSPM (R 4.0.3)                         
-#&gt;  crayon          1.4.0   2021-01-30 [2] RSPM (R 4.0.3)                         
+#&gt;  crayon          1.4.1   2021-02-08 [2] RSPM (R 4.0.3)                         
 #&gt;  desc            1.2.0   2018-05-01 [2] RSPM (R 4.0.0)                         
 #&gt;  digest          0.6.27  2020-10-24 [2] RSPM (R 4.0.3)                         
 #&gt;  evaluate        0.14    2019-05-28 [2] RSPM (R 4.0.0)                         
@@ -229,6 +222,7 @@
 #&gt;  memoise         2.0.0   2021-01-26 [2] RSPM (R 4.0.3)                         
 #&gt;  pkgdown         1.6.1   2020-09-12 [1] RSPM (R 4.0.2)                         
 #&gt;  plyr            1.8.6   2020-03-03 [1] RSPM (R 4.0.3)                         
+#&gt;  purrr           0.3.4   2020-04-17 [2] RSPM (R 4.0.0)                         
 #&gt;  R6              2.5.0   2020-10-28 [2] RSPM (R 4.0.3)                         
 #&gt;  ragg            0.4.1   2021-01-11 [1] RSPM (R 4.0.3)                         
 #&gt;  Rcpp            1.0.6   2021-01-15 [2] RSPM (R 4.0.3)                         
@@ -236,12 +230,13 @@
 #&gt;  rlang           0.4.10  2020-12-30 [2] RSPM (R 4.0.3)                         
 #&gt;  rmarkdown       2.6     2020-12-14 [1] RSPM (R 4.0.3)                         
 #&gt;  rprojroot       2.0.2   2020-11-15 [2] RSPM (R 4.0.3)                         
-#&gt;  rutils        * 0.99.0  2021-02-05 [1] Bioconductor                           
+#&gt;  rutils        * 0.99.1  2021-02-09 [1] Bioconductor                           
 #&gt;  sessioninfo   * 1.1.1   2018-11-05 [2] RSPM (R 4.0.0)                         
 #&gt;  stringi         1.5.3   2020-09-09 [2] RSPM (R 4.0.2)                         
 #&gt;  stringr         1.4.0   2019-02-10 [2] RSPM (R 4.0.0)                         
 #&gt;  systemfonts     1.0.0   2021-02-01 [1] RSPM (R 4.0.3)                         
 #&gt;  textshaping     0.2.1   2020-11-13 [1] RSPM (R 4.0.3)                         
+#&gt;  tidyselect      1.1.0   2020-05-11 [1] RSPM (R 4.0.0)                         
 #&gt;  withr           2.4.1   2021-01-26 [2] RSPM (R 4.0.3)                         
 #&gt;  xfun            0.20    2021-01-06 [2] RSPM (R 4.0.3)                         
 #&gt;  xml2            1.3.2   2020-04-23 [2] RSPM (R 4.0.0)                         
@@ -261,7 +256,7 @@
 <p>[3] G. Csárdi, R. core, H. Wickham, W. Chang, et al. <em>sessioninfo: R Session Information</em>. R package version 1.1.1. 2018. &lt;URL: <a href="https://github.com/r-lib/sessioninfo#readme" class="uri">https://github.com/r-lib/sessioninfo#readme</a>&gt;.</p>
 <p>[4] A. Oleś, M. Morgan, and W. Huber. <em>BiocStyle: Standard styles for vignettes and other Bioconductor documents</em>. R package version 2.18.1. 2020. &lt;URL: <a href="https://github.com/Bioconductor/BiocStyle" class="uri">https://github.com/Bioconductor/BiocStyle</a>&gt;.</p>
 <p>[5] R Core Team. <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing. Vienna, Austria, 2020. &lt;URL: <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>&gt;.</p>
-<p>[6] RHReynolds. <em>Common utility functions</em>. <a href="https://github.com/RHReynolds/rutils" class="uri">https://github.com/RHReynolds/rutils</a> - R package version 0.99.0. 2021. DOI: 10.18129/B9.bioc.rutils. &lt;URL: <a href="http://www.bioconductor.org/packages/rutils" class="uri">http://www.bioconductor.org/packages/rutils</a>&gt;.</p>
+<p>[6] RHReynolds. <em>Common utility functions</em>. <a href="https://github.com/RHReynolds/rutils" class="uri">https://github.com/RHReynolds/rutils</a> - R package version 0.99.1. 2021. DOI: 10.18129/B9.bioc.rutils. &lt;URL: <a href="http://www.bioconductor.org/packages/rutils" class="uri">http://www.bioconductor.org/packages/rutils</a>&gt;.</p>
 <p>[7] H. Wickham. “testthat: Get Started with Testing”. In: <em>The R Journal</em> 3 (2011), pp. 5-10. &lt;URL: <a href="https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf" class="uri">https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf</a>&gt;.</p>
 <p>[8] Y. Xie. <em>knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. R package version 1.31. 2021. &lt;URL: <a href="https://yihui.org/knitr/" class="uri">https://yihui.org/knitr/</a>&gt;.</p>
 </div>
