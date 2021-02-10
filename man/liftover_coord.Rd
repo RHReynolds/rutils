@@ -7,16 +7,60 @@
 liftover_coord(df, path_to_chain)
 }
 \arguments{
-\item{df}{Dataframe with genomic coordinates. Must include columns, \code{CHR} and
-\code{BP}, with chromosome and base pair, respectively. If additional
-columns included these will be preserved.}
+\item{df}{a \code{data.frame} object with genomic coordinates. Must include the
+following columns:
+\itemize{
+\item \code{CHR} - \code{character()} vector, with "chr"
+attached to the chromosome e.g. \code{chr1}
+\item \code{BP} - base pair, as a
+\code{numeric()} vector }
+Any additional columns included will be preserved.}
 
-\item{path_to_chain}{Path to UCSC chain file for transformation. This can
-either be from hg19 to hg38 or hg38 to hg19.}
+\item{path_to_chain}{a \code{character()} vector, with the file path to the UCSC
+chain file for transformation.}
 }
 \value{
 Dataframe with coordinates in different genome build.
 }
 \description{
-Liftover genomic coordinates from one genome build to another.
+This function allows users to lift genomic co-ordinates from one
+genome build to another. It uses an over.chain liftOver conversion file.
+Conversion files can be downloaded from
+\href{http://hgdownload.soe.ucsc.edu/downloads.html#liftover}{UCSC}.
+}
+\examples{
+file_path <- 
+  system.file(
+    "testdata", 
+    "liftover_test_data.txt", 
+    package = "rutils", 
+    mustWork = TRUE
+  )
+
+hg19_path <- 
+  system.file(
+    "testdata", 
+    "hg19ToHg38.over.chain", 
+    package = "rutils", 
+    mustWork = TRUE
+  )
+
+genomic_df <- 
+  readr::read_delim(file_path,
+                    delim = " ",
+                    col_types =
+                      readr::cols(
+                        SNP = readr::col_character(),
+                        CHR = readr::col_factor(),
+                        BP_hg19 = readr::col_integer(),
+                        BP_hg38 = readr::col_integer()
+                      ))
+
+liftover_coord(df = 
+                 genomic_df \%>\% 
+                 dplyr::select(SNP, 
+                               CHR, 
+                               BP = BP_hg19), 
+               path_to_chain = hg19_path
+)
 }
