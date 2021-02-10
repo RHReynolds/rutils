@@ -40,7 +40,10 @@
 
 
 <meta property="og:title" content="Liftover genomic coordinates from one genome build to another. — liftover_coord" />
-<meta property="og:description" content="Liftover genomic coordinates from one genome build to another." />
+<meta property="og:description" content="This function allows users to lift genomic co-ordinates from one
+genome build to another. It uses an over.chain liftOver conversion file.
+Conversion files can be downloaded from
+UCSC." />
 
 
 
@@ -72,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rutils</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.2</span>
       </span>
     </div>
 
@@ -120,7 +123,10 @@
     </div>
 
     <div class="ref-description">
-    <p>Liftover genomic coordinates from one genome build to another.</p>
+    <p>This function allows users to lift genomic co-ordinates from one
+genome build to another. It uses an over.chain liftOver conversion file.
+Conversion files can be downloaded from
+<a href='http://hgdownload.soe.ucsc.edu/downloads.html#liftover'>UCSC</a>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>liftover_coord</span><span class='op'>(</span><span class='va'>df</span>, <span class='va'>path_to_chain</span><span class='op'>)</span></pre>
@@ -130,14 +136,18 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>Dataframe with genomic coordinates. Must include columns, <code>CHR</code> and
-<code>BP</code>, with chromosome and base pair, respectively. If additional
-columns included these will be preserved.</p></td>
+      <td><p>a <code>data.frame</code> object with genomic coordinates. Must include the
+following columns:</p><ul>
+<li><p><code>CHR</code> - <code><a href='https://rdrr.io/r/base/character.html'>character()</a></code> vector, with "chr"
+attached to the chromosome e.g. <code>chr1</code></p></li>
+<li><p><code>BP</code> - base pair, as a
+<code><a href='https://rdrr.io/r/base/numeric.html'>numeric()</a></code> vector</p></li>
+</ul><p>Any additional columns included will be preserved.</p></td>
     </tr>
     <tr>
       <th>path_to_chain</th>
-      <td><p>Path to UCSC chain file for transformation. This can
-either be from hg19 to hg38 or hg38 to hg19.</p></td>
+      <td><p>a <code><a href='https://rdrr.io/r/base/character.html'>character()</a></code> vector, with the file path to the UCSC
+chain file for transformation.</p></td>
     </tr>
     </table>
 
@@ -145,6 +155,54 @@ either be from hg19 to hg38 or hg38 to hg19.</p></td>
 
     <p>Dataframe with coordinates in different genome build.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='va'>file_path</span> <span class='op'>&lt;-</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span>
+    <span class='st'>"testdata"</span>, 
+    <span class='st'>"liftover_test_data.txt"</span>, 
+    package <span class='op'>=</span> <span class='st'>"rutils"</span>, 
+    mustWork <span class='op'>=</span> <span class='cn'>TRUE</span>
+  <span class='op'>)</span>
+
+<span class='va'>hg19_path</span> <span class='op'>&lt;-</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span>
+    <span class='st'>"testdata"</span>, 
+    <span class='st'>"hg19ToHg38.over.chain"</span>, 
+    package <span class='op'>=</span> <span class='st'>"rutils"</span>, 
+    mustWork <span class='op'>=</span> <span class='cn'>TRUE</span>
+  <span class='op'>)</span>
+
+<span class='va'>genomic_df</span> <span class='op'>&lt;-</span> 
+  <span class='fu'>readr</span><span class='fu'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_delim</a></span><span class='op'>(</span><span class='va'>file_path</span>,
+                    delim <span class='op'>=</span> <span class='st'>" "</span>,
+                    col_types <span class='op'>=</span>
+                      <span class='fu'>readr</span><span class='fu'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/cols.html'>cols</a></span><span class='op'>(</span>
+                        SNP <span class='op'>=</span> <span class='fu'>readr</span><span class='fu'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_character</a></span><span class='op'>(</span><span class='op'>)</span>,
+                        CHR <span class='op'>=</span> <span class='fu'>readr</span><span class='fu'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_factor.html'>col_factor</a></span><span class='op'>(</span><span class='op'>)</span>,
+                        BP_hg19 <span class='op'>=</span> <span class='fu'>readr</span><span class='fu'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_integer</a></span><span class='op'>(</span><span class='op'>)</span>,
+                        BP_hg38 <span class='op'>=</span> <span class='fu'>readr</span><span class='fu'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_integer</a></span><span class='op'>(</span><span class='op'>)</span>
+                      <span class='op'>)</span><span class='op'>)</span>
+
+<span class='fu'>liftover_coord</span><span class='op'>(</span>df <span class='op'>=</span> 
+                 <span class='va'>genomic_df</span> <span class='op'>%&gt;%</span> 
+                 <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>SNP</span>, 
+                               <span class='va'>CHR</span>, 
+                               BP <span class='op'>=</span> <span class='va'>BP_hg19</span><span class='op'>)</span>, 
+               path_to_chain <span class='op'>=</span> <span class='va'>hg19_path</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 10 x 3</span><span>
+#&gt;    CHR          BP SNP       
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     
+#&gt; </span><span style='color: #555555;'> 1</span><span> 9      68</span><span style='text-decoration: underline;'>413</span><span>211 rs2639606 
+#&gt; </span><span style='color: #555555;'> 2</span><span> 6      25</span><span style='text-decoration: underline;'>056</span><span>560 rs75264089
+#&gt; </span><span style='color: #555555;'> 3</span><span> 11      5</span><span style='text-decoration: underline;'>842</span><span>331 rs73396229
+#&gt; </span><span style='color: #555555;'> 4</span><span> 13     94</span><span style='text-decoration: underline;'>507</span><span>628 rs55871206
+#&gt; </span><span style='color: #555555;'> 5</span><span> 2     208</span><span style='text-decoration: underline;'>036</span><span>470 rs10932221
+#&gt; </span><span style='color: #555555;'> 6</span><span> 4     176</span><span style='text-decoration: underline;'>727</span><span>425 rs56219727
+#&gt; </span><span style='color: #555555;'> 7</span><span> 7      81</span><span style='text-decoration: underline;'>365</span><span>934 rs73709730
+#&gt; </span><span style='color: #555555;'> 8</span><span> 1      78</span><span style='text-decoration: underline;'>612</span><span>399 rs55838886
+#&gt; </span><span style='color: #555555;'> 9</span><span> 5        </span><span style='text-decoration: underline;'>820</span><span>966 rs3734153 
+#&gt; </span><span style='color: #555555;'>10</span><span> 11    130</span><span style='text-decoration: underline;'>258</span><span>442 rs79381275</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
