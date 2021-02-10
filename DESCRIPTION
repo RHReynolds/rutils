@@ -1,6 +1,6 @@
 Package: rutils
 Title: Common utility functions
-Version: 0.99.1
+Version: 0.99.2
 Date: 2020-12-08
 Authors@R: 
     person(given = "Regina",
@@ -37,4 +37,6 @@ Imports:
     GOSemSim,
     rrvgo,
     tidyselect,
-    org.Hs.eg.db
+    org.Hs.eg.db,
+    forcats,
+    ggplot2
