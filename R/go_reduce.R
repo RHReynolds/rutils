@@ -28,9 +28,14 @@
 #'  \item `go_id`: the gene ontology identifier (e.g. GO:0016209)
 #'  }
 #' @param threshold `numeric()` vector. Similarity threshold (0-1) for
-#'  \code{rrvgo::\link[rrvgo:reduceSimMatrix]{reduceSimMatrix()}}. Some
-#'  guidance: Large (allowed similarity=0.9), Medium (0.7), Small (0.5), Tiny
-#'  (0.4) Defaults to Medium (0.7).
+#'  \code{rrvgo::\link[rrvgo:reduceSimMatrix]{reduceSimMatrix()}}. Default
+#'  option is 0.7. Some guidance:
+#'  \itemize{
+#'  \item For large term groupings, use `threshold = 0.9`
+#'  \item For medium term groupings, use `threshold = 0.7`
+#'  \item For small term groupings, use `threshold = 0.5`
+#'  \item For tiny term groupings, use `threshold = 0.4`
+#'  }
 #' @param scores \strong{named} vector, with scores (weights) assigned to each
 #'  term. Higher is better. Can be NULL (default, means no scores. In this case,
 #'  a default score based on set size is assigned, thus favoring larger sets).
@@ -46,7 +51,17 @@
 #'  its parent term
 #'  }
 #' @export
-#'
+#' 
+#' @importFrom stats setNames
+#' @importFrom tidyselect contains
+#' 
+#' @family GO-related functions
+#' @seealso \code{\link{go_plot}} for plotting the output of `go_reduce`,
+#'   \code{GOSemSim::\link[GOSemSim:mgoSim]{mgoSim}} for calculation of semantic
+#'   similarity and
+#'   \code{rrvgo::\link[rrvgo:reduceSimMatrix]{reduceSimMatrix()}} for reduction
+#'   of similarity matrix
+#'   
 #' @references \itemize{
 #'  \item Yu et al. (2010) GOSemSim: an R package for measuring semantic
 #'  similarity among GO terms and gene products \emph{Bioinformatics} (Oxford,
@@ -57,8 +72,6 @@
 #'  reduce and visualize Gene Ontology terms. \url{https://ssayols.github.io/rrvgo}
 #'  }
 #'  
-#' @importFrom stats setNames
-#' @importFrom tidyselect contains
 #'
 #' @examples
 #' file_path <- 
@@ -73,13 +86,13 @@
 #'   readr::read_delim(file_path,
 #'                     delim = "\t")
 #' 
-#' reduce_go_redundancy(
+#' go_reduce(
 #'   pathway_df = pathway_df,
 #'   threshold = 0.9,
 #'   scores = NULL)
 #'   
 
-reduce_go_redundancy <- function(
+go_reduce <- function(
   pathway_df,
   threshold = 0.7,
   scores = NULL) {
@@ -105,6 +118,7 @@ reduce_go_redundancy <- function(
 
 
   for (i in 1:length(ont)) {
+    
     hsGO <-
       GOSemSim::godata(
         OrgDb = "org.Hs.eg.db",
@@ -146,13 +160,18 @@ reduce_go_redundancy <- function(
   go_sim_df <-
     go_similarity %>%
     qdapTools::list_df2df(col1 = "go_type")
-
+  
   pathway_go_sim_df <-
     pathway_df %>%
-    dplyr::inner_join(go_sim_df %>%
-                        dplyr::select(.data$go_type, go_id = .data$go, contains("parent"))) %>% 
+    dplyr::inner_join(
+      go_sim_df %>%
+        dplyr::select(.data$go_type, 
+                      go_id = .data$go, 
+                      contains("parent")),
+      by = c("go_type", "go_id")
+    ) %>% 
     dplyr::arrange(.data$go_type, .data$parent_id, -.data$parent_sim_score)
-
+  
   return(pathway_go_sim_df)
   
 }
