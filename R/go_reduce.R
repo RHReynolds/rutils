@@ -102,7 +102,7 @@ go_reduce <- function(
     .[["go_type"]] %>% 
     unique()
   
-  if(!ont %in% c("BP", "CC", "MF")){
+  if(any(!ont %in% c("BP", "CC", "MF"))){
     stop('Column go_type does not contain the recognised sub-ontologies, c("BP", "CC", "MF")')
   }
 
@@ -118,6 +118,8 @@ go_reduce <- function(
 
 
   for (i in 1:length(ont)) {
+    
+    print(stringr::str_c("Reducing sub-ontology: ", ont[i]))
     
     hsGO <-
       GOSemSim::godata(
@@ -146,7 +148,7 @@ go_reduce <- function(
     # Reduce terms as based on scores or set size assigned
     go_similarity[[i]] <-
       rrvgo::reduceSimMatrix(
-        sim = sim,
+        simMatrix = sim,
         threshold = threshold,
         orgdb = "org.Hs.eg.db",
         scores = scores
