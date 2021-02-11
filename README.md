@@ -15,12 +15,53 @@ There is no plan to ever submit this code to `CRAN` or `Bioconductor`. This code
 BiocManager::install("RHReynolds/rutils")
 ```
 
+**Note:** If you are running R (&gt;= 4.0), installation may return the error that `GOSemSim` (v2.16.1) and/or `rrvgo` are not available for your R version. However, these packages do not actually have a dependency on R (&gt;= 4.0) -- the error occurs because these packages cannot be found using your version of BioConductor (which is likely to be &lt; 3.12). A workaround to this issue is to install the development versions of these packages directly from GitHub, using the following command:
+
+``` r
+
+# If GOSemSim successfully installed, simply remove from command 
+remotes::install_github(c("GuangchuangYu/GOSemSim", "ssayols/rrvgo"))
+```
+
+The downside of this is, of course, that these are development versions, and thus may not be entirely stable, so be sure to check in on these packages every so often to see if there have been any major bug fixes.
+
 ## Citation
 
 Below is the citation output from using `citation('rutils')` in R. Please run this yourself to check for any updates on how to cite **rutils**.
 
 ``` r
 print(citation("rutils"), bibtex = TRUE)
+#> 
+#> RHReynolds (2021). _Common utility functions_. doi:
+#> 10.18129/B9.bioc.rutils (URL: https://doi.org/10.18129/B9.bioc.rutils),
+#> https://github.com/RHReynolds/rutils - R package version 0.99.2, <URL:
+#> http://www.bioconductor.org/packages/rutils>.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {Common utility functions},
+#>     author = {{RHReynolds}},
+#>     year = {2021},
+#>     url = {http://www.bioconductor.org/packages/rutils},
+#>     note = {https://github.com/RHReynolds/rutils - R package version 0.99.2},
+#>     doi = {10.18129/B9.bioc.rutils},
+#>   }
+#> 
+#> RHReynolds (2020). "Common utility functions." _bioRxiv_. doi:
+#> 10.1101/TODO (URL: https://doi.org/10.1101/TODO), <URL:
+#> https://www.biorxiv.org/content/10.1101/TODO>.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Article{,
+#>     title = {Common utility functions},
+#>     author = {{RHReynolds}},
+#>     year = {2020},
+#>     journal = {bioRxiv},
+#>     doi = {10.1101/TODO},
+#>     url = {https://www.biorxiv.org/content/10.1101/TODO},
+#>   }
 ```
 
 Please note that the `rutils` was only made possible thanks to many other R and bioinformatics software authors, which are cited either in the vignettes and/or the paper(s) describing this package.

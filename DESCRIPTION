@@ -34,7 +34,7 @@ Imports:
     stringr,
     tibble,
     qdapTools,
-    GOSemSim,
+    GOSemSim (>= 2.16.1),
     rrvgo,
     tidyselect,
     org.Hs.eg.db,

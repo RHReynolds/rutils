@@ -1,10 +1,10 @@
 ---
 title: "Introduction to rutils"
 author: 
-  - name: Your name
+  - name: Regina H. Reynolds
     affiliation:
-    - Your institution
-    email: your.email@somewhere.com
+    - UCL
+    email: regina.reynolds.16@ucl.ac.uk
 output: 
   BiocStyle::html_document:
     self_contained: yes
@@ -91,9 +91,10 @@ citation("rutils")
 library("rutils")
 ```
 
-Here is an example of you can cite your package inside the vignette:
+A number of different families of functions exist in `rutils`, including:
 
-* `r Biocpkg("rutils")` `r citep(bib[["rutils"]])`
+- GO-related functions, including `go_reduce()` and `go_plot()`.
+- Genomic-related functions, including `liftover_coord()`.
 
 # Reproducibility
 
@@ -108,7 +109,6 @@ The `r Biocpkg("rutils")` package `r citep(bib[["rutils"]])` was made possible t
 * `r CRANpkg("testthat")` `r citep(bib[["testthat"]])`
 
 This package was developed using `r BiocStyle::Githubpkg("lcolladotor/biocthis")`.
-
 
 Code for creating the vignette
 
@@ -150,8 +150,6 @@ library("sessioninfo")
 options(width = 120)
 session_info()
 ```
-
-
 
 # Bibliography
 
