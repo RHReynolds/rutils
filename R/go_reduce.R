@@ -8,12 +8,14 @@
 #'  scores (in this case, a default score based on set size is assigned.)
 #'
 #' @details Semantic similarity is calculated using the "Wang" method, a
-#'  graph-based strategy to compute semantic similarity using the topology of
-#'  the GO graph structure. \code{GOSemSim::\link[GOSemSim:mgoSim]{mgoSim}} does
-#'  permit use of other measures (primarily information-content measures), but
-#'  "Wang" is used as the default in GOSemSim (and was, thus, used as the
-#'  default here).
-#'
+#'   graph-based strategy to compute semantic similarity using the topology of
+#'   the GO graph structure. \code{GOSemSim::\link[GOSemSim:mgoSim]{mgoSim}}
+#'   does permit use of other measures (primarily information-content measures),
+#'   but "Wang" is used as the default in GOSemSim (and was, thus, used as the
+#'   default here). If you wish to use a different measure, please refer to the
+#'   [GOSemSim
+#'   documentation](https://yulab-smu.top/biomedical-knowledge-mining-book/semantic-similarity-overview.html).
+#'   
 #'  \code{rrvgo::\link[rrvgo:reduceSimMatrix]{reduceSimMatrix()}} creates a
 #'  distance matrix, defined as (1-simMatrix). The terms are then hierarchically
 #'  clustered using complete linkage (an agglomerative, or "bottom-up"
@@ -41,7 +43,10 @@
 #'  a default score based on set size is assigned, thus favoring larger sets).
 #'  Note: if you have p-values as scores, consider log-transforming them
 #'  (`-log10(p)`).
-#'
+#' @param measure `character()` vector, indicating method to be used to
+#'   calculate semantic similarity measure. Must be one of the methods supported
+#'   by GOSemSim: c("Resnik", "Lin", "Rel", "Jiang", "Wang"). Default is "Wang".
+#'   
 #' @return a [tibble][tibble::tbl_df-class] object of pathway results, a
 #'  "reduced" parent term to which pathways have been assigned. New columns:
 #'  \itemize{
@@ -68,6 +73,9 @@
 #'  England), 26:7 976--978, April 2010.
 #'  \url{http://bioinformatics.oxfordjournals.org/cgi/content/abstract/26/7/976}
 #'  PMID: 20179076
+#'  \item Yu (2021) Biomedical Knowledge Mining using GOSemSim and
+#'  clusterProfiler
+#'  \url{https://yulab-smu.top/biomedical-knowledge-mining-book/index.html}
 #'  \item Sayols S (2020). rrvgo: a Bioconductor package to
 #'  reduce and visualize Gene Ontology terms. \url{https://ssayols.github.io/rrvgo}
 #'  }
@@ -89,14 +97,28 @@
 #' go_reduce(
 #'   pathway_df = pathway_df,
 #'   threshold = 0.9,
-#'   scores = NULL)
+#'   scores = NULL,
+#'   measure = "Wang")
 #'   
 
 go_reduce <- function(
   pathway_df,
   threshold = 0.7,
-  scores = NULL) {
+  scores = NULL,
+  measure = "Wang") {
   
+  if(!measure %in% c("Resnik", "Lin", "Rel", "Jiang", "Wang")){
+    stop('Chosen measure is not one of the recognised measures, c("Resnik", "Lin", "Rel", "Jiang", "Wang").')
+  }
+  
+  # Based on chosen measure, set whether or not to compute information content
+  if(measure == "Wang"){
+    computeIC <- FALSE
+  } else{
+    computeIC <- TRUE
+  }
+  
+  # Get ontology
   ont <- 
     pathway_df %>% 
     .[["go_type"]] %>% 
@@ -116,7 +138,6 @@ go_reduce <- function(
       nm = ont
     )
 
-
   for (i in 1:length(ont)) {
     
     print(stringr::str_c("Reducing sub-ontology: ", ont[i]))
@@ -125,7 +146,7 @@ go_reduce <- function(
       GOSemSim::godata(
         OrgDb = "org.Hs.eg.db",
         ont = ont[i],
-        computeIC = FALSE
+        computeIC = computeIC
       )
 
     # Get unique ont terms from pathway_df
@@ -141,7 +162,7 @@ go_reduce <- function(
         GO1 = terms,
         GO2 = terms,
         semData = hsGO,
-        measure = "Wang",
+        measure = measure,
         combine = NULL
       )
 

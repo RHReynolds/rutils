@@ -4,7 +4,7 @@
 \alias{go_reduce}
 \title{Reduce redundancy of human GO terms}
 \usage{
-go_reduce(pathway_df, threshold = 0.7, scores = NULL)
+go_reduce(pathway_df, threshold = 0.7, scores = NULL, measure = "Wang")
 }
 \arguments{
 \item{pathway_df}{a \code{data.frame} or \link[tibble:tbl_df-class]{tibble} object,
@@ -30,6 +30,10 @@ term. Higher is better. Can be NULL (default, means no scores. In this case,
 a default score based on set size is assigned, thus favoring larger sets).
 Note: if you have p-values as scores, consider log-transforming them
 (\code{-log10(p)}).}
+
+\item{measure}{\code{character()} vector, indicating method to be used to
+calculate semantic similarity measure. Must be one of the methods supported
+by GOSemSim: c("Resnik", "Lin", "Rel", "Jiang", "Wang"). Default is "Wang".}
 }
 \value{
 a \link[tibble:tbl_df-class]{tibble} object of pathway results, a
@@ -52,10 +56,11 @@ scores (in this case, a default score based on set size is assigned.)
 \details{
 Semantic similarity is calculated using the "Wang" method, a
 graph-based strategy to compute semantic similarity using the topology of
-the GO graph structure. \code{GOSemSim::\link[GOSemSim:mgoSim]{mgoSim}} does
-permit use of other measures (primarily information-content measures), but
-"Wang" is used as the default in GOSemSim (and was, thus, used as the
-default here).
+the GO graph structure. \code{GOSemSim::\link[GOSemSim:mgoSim]{mgoSim}}
+does permit use of other measures (primarily information-content measures),
+but "Wang" is used as the default in GOSemSim (and was, thus, used as the
+default here). If you wish to use a different measure, please refer to the
+\href{https://yulab-smu.top/biomedical-knowledge-mining-book/semantic-similarity-overview.html}{GOSemSim documentation}.
 
 \code{rrvgo::\link[rrvgo:reduceSimMatrix]{reduceSimMatrix()}} creates a
 distance matrix, defined as (1-simMatrix). The terms are then hierarchically
@@ -79,7 +84,8 @@ pathway_df <-
 go_reduce(
   pathway_df = pathway_df,
   threshold = 0.9,
-  scores = NULL)
+  scores = NULL,
+  measure = "Wang")
   
 }
 \references{
@@ -89,6 +95,9 @@ similarity among GO terms and gene products \emph{Bioinformatics} (Oxford,
 England), 26:7 976--978, April 2010.
 \url{http://bioinformatics.oxfordjournals.org/cgi/content/abstract/26/7/976}
 PMID: 20179076
+\item Yu (2021) Biomedical Knowledge Mining using GOSemSim and
+clusterProfiler
+\url{https://yulab-smu.top/biomedical-knowledge-mining-book/index.html}
 \item Sayols S (2020). rrvgo: a Bioconductor package to
 reduce and visualize Gene Ontology terms. \url{https://ssayols.github.io/rrvgo}
 }
