@@ -63,7 +63,8 @@ reduced_pathway_df <-
   go_reduce(
    pathway_df = pathway_df,
    threshold = 0.9,
-   scores = NULL)
+   scores = NULL,
+   measure = "Wang")
 
 go_plot(
   reduced_pathway_df,
