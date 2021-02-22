@@ -31,10 +31,9 @@ There is no plan to ever submit this code to `CRAN` or `Bioconductor`. This code
 BiocManager::install("RHReynolds/rutils")
 ```
 
-**Note:** If you are running R (>= 4.0), installation may return the error that `GOSemSim` (v2.16.1) and/or `rrvgo` are not available for your R version. However, these packages do not actually have a dependency on R (>= 4.0) -- the error occurs because these packages cannot be found using your version of BioConductor (which is likely to be < 3.12). A workaround to this issue is to install the development versions of these packages directly from GitHub, using the following command:
+**Note:** If you are running R (< 4.0), installation may return the error that `GOSemSim` (v2.16.1) and/or `rrvgo` are not available for your R version. However, these packages do not actually have a dependency on R (>= 4.0) -- the error occurs because these packages cannot be found using your version of BioConductor (which is likely to be < 3.12). A workaround to this issue is to install the development versions of these packages directly from GitHub, using the following command:
 
 ```{r install-gosemsim-rrvgo, eval = FALSE}
-
 # If GOSemSim successfully installed, simply remove from command 
 remotes::install_github(c("GuangchuangYu/GOSemSim", "ssayols/rrvgo"))
 
