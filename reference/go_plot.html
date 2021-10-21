@@ -179,32 +179,36 @@ input gene list).</p></li>
 <code><a href='go_reduce.html'>go_reduce</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>file_path</span> <span class='op'>&lt;-</span> 
-   <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span>
-     <span class='st'>"testdata"</span>, 
-     <span class='st'>"go_test_data.txt"</span>, 
-     package <span class='op'>=</span> <span class='st'>"rutils"</span>, 
-     mustWork <span class='op'>=</span> <span class='cn'>TRUE</span>
-   <span class='op'>)</span>
-   
-<span class='va'>pathway_df</span> <span class='op'>&lt;-</span> 
-   <span class='fu'>readr</span><span class='fu'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_delim</a></span><span class='op'>(</span><span class='va'>file_path</span>,
-                     delim <span class='op'>=</span> <span class='st'>"\t"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-   <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>gene_list <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='fl'>5</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"b"</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>,
-                 fdr <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>10</span>, min<span class='op'>=</span><span class='fl'>0</span>, max<span class='op'>=</span><span class='fl'>0.05</span><span class='op'>)</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>file_path</span> <span class='op'>&lt;-</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span>
+        <span class='st'>"testdata"</span>,
+        <span class='st'>"go_test_data.txt"</span>,
+        package <span class='op'>=</span> <span class='st'>"rutils"</span>,
+        mustWork <span class='op'>=</span> <span class='cn'>TRUE</span>
+    <span class='op'>)</span>
+
+<span class='va'>pathway_df</span> <span class='op'>&lt;-</span>
+    <span class='fu'>readr</span><span class='fu'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_delim</a></span><span class='op'>(</span><span class='va'>file_path</span>,
+        delim <span class='op'>=</span> <span class='st'>"\t"</span>
+    <span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>
+        gene_list <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='fl'>5</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"b"</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>,
+        fdr <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>10</span>, min <span class='op'>=</span> <span class='fl'>0</span>, max <span class='op'>=</span> <span class='fl'>0.05</span><span class='op'>)</span>
+    <span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>Column specification</span><span> </span><span style='color: #00BBBB;'>────────────────────────────────────────────────────────</span><span></span>
 #&gt; <span class='message'>cols(</span>
 #&gt; <span class='message'>  go_type = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
 #&gt; <span class='message'>  go_id = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
 #&gt; <span class='message'>  go_term = </span><span style='color: #BB0000;'>col_character()</span><span></span>
-#&gt; <span class='message'>)</span></div><div class='input'> 
-<span class='va'>reduced_pathway_df</span> <span class='op'>&lt;-</span>  
-  <span class='fu'><a href='go_reduce.html'>go_reduce</a></span><span class='op'>(</span>
-   pathway_df <span class='op'>=</span> <span class='va'>pathway_df</span>,
-   threshold <span class='op'>=</span> <span class='fl'>0.9</span>,
-   scores <span class='op'>=</span> <span class='cn'>NULL</span>,
-   measure <span class='op'>=</span> <span class='st'>"Wang"</span><span class='op'>)</span>
+#&gt; <span class='message'>)</span></div><div class='input'>
+<span class='va'>reduced_pathway_df</span> <span class='op'>&lt;-</span>
+    <span class='fu'><a href='go_reduce.html'>go_reduce</a></span><span class='op'>(</span>
+        pathway_df <span class='op'>=</span> <span class='va'>pathway_df</span>,
+        threshold <span class='op'>=</span> <span class='fl'>0.9</span>,
+        scores <span class='op'>=</span> <span class='cn'>NULL</span>,
+        measure <span class='op'>=</span> <span class='st'>"Wang"</span>
+    <span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "Reducing sub-ontology: BP"</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>Loading required package: org.Hs.eg.db</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: AnnotationDbi</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: stats4</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: BiocGenerics</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: parallel</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘BiocGenerics’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:parallel’:</span>
 #&gt; <span class='message'></span>
@@ -228,10 +232,11 @@ input gene list).</p></li>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    expand.grid</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>preparing gene to GO mapping data...</span></div><div class='output co'>#&gt; <span class='message'>No scores provided. Falling back to term's size</span></div><div class='input'>
 <span class='fu'>go_plot</span><span class='op'>(</span>
-  <span class='va'>reduced_pathway_df</span>,
-  col_gene_list <span class='op'>=</span> <span class='st'>"gene_list"</span>,
-  col_fdr <span class='op'>=</span> <span class='st'>"fdr"</span>,
-  fct_gene_list <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"b"</span>, <span class='st'>"a"</span><span class='op'>)</span><span class='op'>)</span>
+    <span class='va'>reduced_pathway_df</span>,
+    col_gene_list <span class='op'>=</span> <span class='st'>"gene_list"</span>,
+    col_fdr <span class='op'>=</span> <span class='st'>"fdr"</span>,
+    fct_gene_list <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"b"</span>, <span class='st'>"a"</span><span class='op'>)</span>
+<span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>Joining, by = "parent_term"</span></div><div class='img'><img src='go_plot-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
