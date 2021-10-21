@@ -45,32 +45,37 @@ input gene list).
 \code{go_plot} plots GO terms that have been reduced using \code{\link{go_reduce}}.
 }
 \examples{
-file_path <- 
-   system.file(
-     "testdata", 
-     "go_test_data.txt", 
-     package = "rutils", 
-     mustWork = TRUE
-   )
-   
-pathway_df <- 
-   readr::read_delim(file_path,
-                     delim = "\t") \%>\% 
-   dplyr::mutate(gene_list = c(rep("a", 5), rep("b", 5)),
-                 fdr = runif(10, min=0, max=0.05))
- 
-reduced_pathway_df <-  
-  go_reduce(
-   pathway_df = pathway_df,
-   threshold = 0.9,
-   scores = NULL,
-   measure = "Wang")
+file_path <-
+    system.file(
+        "testdata",
+        "go_test_data.txt",
+        package = "rutils",
+        mustWork = TRUE
+    )
+
+pathway_df <-
+    readr::read_delim(file_path,
+        delim = "\t"
+    ) \%>\%
+    dplyr::mutate(
+        gene_list = c(rep("a", 5), rep("b", 5)),
+        fdr = runif(10, min = 0, max = 0.05)
+    )
+
+reduced_pathway_df <-
+    go_reduce(
+        pathway_df = pathway_df,
+        threshold = 0.9,
+        scores = NULL,
+        measure = "Wang"
+    )
 
 go_plot(
-  reduced_pathway_df,
-  col_gene_list = "gene_list",
-  col_fdr = "fdr",
-  fct_gene_list = c("b", "a"))
+    reduced_pathway_df,
+    col_gene_list = "gene_list",
+    col_fdr = "fdr",
+    fct_gene_list = c("b", "a")
+)
 }
 \seealso{
 \code{\link{go_reduce}} for reducing GO terms

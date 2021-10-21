@@ -29,38 +29,41 @@ Conversion files can be downloaded from
 \href{http://hgdownload.soe.ucsc.edu/downloads.html#liftover}{UCSC}.
 }
 \examples{
-file_path <- 
-  system.file(
-    "testdata", 
-    "liftover_test_data.txt", 
-    package = "rutils", 
-    mustWork = TRUE
-  )
+file_path <-
+    system.file(
+        "testdata",
+        "liftover_test_data.txt",
+        package = "rutils",
+        mustWork = TRUE
+    )
 
-hg19_path <- 
-  system.file(
-    "testdata", 
-    "hg19ToHg38.over.chain", 
-    package = "rutils", 
-    mustWork = TRUE
-  )
+hg19_path <-
+    system.file(
+        "testdata",
+        "hg19ToHg38.over.chain",
+        package = "rutils",
+        mustWork = TRUE
+    )
 
-genomic_df <- 
-  readr::read_delim(file_path,
-                    delim = " ",
-                    col_types =
-                      readr::cols(
-                        SNP = readr::col_character(),
-                        CHR = readr::col_factor(),
-                        BP_hg19 = readr::col_integer(),
-                        BP_hg38 = readr::col_integer()
-                      ))
+genomic_df <-
+    readr::read_delim(file_path,
+        delim = " ",
+        col_types =
+            readr::cols(
+                SNP = readr::col_character(),
+                CHR = readr::col_factor(),
+                BP_hg19 = readr::col_integer(),
+                BP_hg38 = readr::col_integer()
+            )
+    )
 
-liftover_coord(df = 
-                 genomic_df \%>\% 
-                 dplyr::select(SNP, 
-                               CHR, 
-                               BP = BP_hg19), 
-               path_to_chain = hg19_path
+liftover_coord(
+    df =
+        genomic_df \%>\%
+            dplyr::select(SNP,
+                CHR,
+                BP = BP_hg19
+            ),
+    path_to_chain = hg19_path
 )
 }

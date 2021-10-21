@@ -15,7 +15,7 @@
 #'   default here). If you wish to use a different measure, please refer to the
 #'   [GOSemSim
 #'   documentation](https://yulab-smu.top/biomedical-knowledge-mining-book/semantic-similarity-overview.html).
-#'   
+#'
 #'  \code{rrvgo::\link[rrvgo:reduceSimMatrix]{reduceSimMatrix()}} creates a
 #'  distance matrix, defined as (1-simMatrix). The terms are then hierarchically
 #'  clustered using complete linkage (an agglomerative, or "bottom-up"
@@ -46,7 +46,7 @@
 #' @param measure `character()` vector, indicating method to be used to
 #'   calculate semantic similarity measure. Must be one of the methods supported
 #'   by GOSemSim: c("Resnik", "Lin", "Rel", "Jiang", "Wang"). Default is "Wang".
-#'   
+#'
 #' @return a [tibble][tibble::tbl_df-class] object of pathway results, a
 #'  "reduced" parent term to which pathways have been assigned. New columns:
 #'  \itemize{
@@ -56,17 +56,17 @@
 #'  its parent term
 #'  }
 #' @export
-#' 
+#'
 #' @importFrom stats setNames
 #' @importFrom tidyselect contains
-#' 
+#'
 #' @family GO-related functions
 #' @seealso \code{\link{go_plot}} for plotting the output of `go_reduce`,
 #'   \code{GOSemSim::\link[GOSemSim:mgoSim]{mgoSim}} for calculation of semantic
 #'   similarity and
 #'   \code{rrvgo::\link[rrvgo:reduceSimMatrix]{reduceSimMatrix()}} for reduction
 #'   of similarity matrix
-#'   
+#'
 #' @references \itemize{
 #'  \item Yu et al. (2010) GOSemSim: an R package for measuring semantic
 #'  similarity among GO terms and gene products \emph{Bioinformatics} (Oxford,
@@ -79,122 +79,121 @@
 #'  \item Sayols S (2020). rrvgo: a Bioconductor package to
 #'  reduce and visualize Gene Ontology terms. \url{https://ssayols.github.io/rrvgo}
 #'  }
-#'  
+#'
 #'
 #' @examples
-#' file_path <- 
-#'   system.file(
-#'     "testdata", 
-#'     "go_test_data.txt", 
-#'     package = "rutils", 
-#'     mustWork = TRUE
-#'   )
-#'   
-#' pathway_df <- 
-#'   readr::read_delim(file_path,
-#'                     delim = "\t")
-#' 
+#' file_path <-
+#'     system.file(
+#'         "testdata",
+#'         "go_test_data.txt",
+#'         package = "rutils",
+#'         mustWork = TRUE
+#'     )
+#'
+#' pathway_df <-
+#'     readr::read_delim(file_path,
+#'         delim = "\t"
+#'     )
+#'
 #' go_reduce(
-#'   pathway_df = pathway_df,
-#'   threshold = 0.9,
-#'   scores = NULL,
-#'   measure = "Wang")
-#'   
+#'     pathway_df = pathway_df,
+#'     threshold = 0.9,
+#'     scores = NULL,
+#'     measure = "Wang"
+#' )
+go_reduce <- function(pathway_df,
+    threshold = 0.7,
+    scores = NULL,
+    measure = "Wang") {
+    if (!measure %in% c("Resnik", "Lin", "Rel", "Jiang", "Wang")) {
+        stop('Chosen measure is not one of the recognised measures, c("Resnik", "Lin", "Rel", "Jiang", "Wang").')
+    }
 
-go_reduce <- function(
-  pathway_df,
-  threshold = 0.7,
-  scores = NULL,
-  measure = "Wang") {
-  
-  if(!measure %in% c("Resnik", "Lin", "Rel", "Jiang", "Wang")){
-    stop('Chosen measure is not one of the recognised measures, c("Resnik", "Lin", "Rel", "Jiang", "Wang").')
-  }
-  
-  # Based on chosen measure, set whether or not to compute information content
-  if(measure == "Wang"){
-    computeIC <- FALSE
-  } else{
-    computeIC <- TRUE
-  }
-  
-  # Get ontology
-  ont <- 
-    pathway_df %>% 
-    .[["go_type"]] %>% 
-    unique()
-  
-  if(any(!ont %in% c("BP", "CC", "MF"))){
-    stop('Column go_type does not contain the recognised sub-ontologies, c("BP", "CC", "MF")')
-  }
+    # Based on chosen measure, set whether or not to compute information content
+    if (measure == "Wang") {
+        computeIC <- FALSE
+    } else {
+        computeIC <- TRUE
+    }
 
-  go_similarity <-
-    setNames(
-      object =
-        vector(
-          mode = "list",
-          length = length(ont)
-        ),
-      nm = ont
-    )
+    # Get ontology
+    ont <-
+        pathway_df %>%
+        .[["go_type"]] %>%
+        unique()
 
-  for (i in 1:length(ont)) {
-    
-    print(stringr::str_c("Reducing sub-ontology: ", ont[i]))
-    
-    hsGO <-
-      GOSemSim::godata(
-        OrgDb = "org.Hs.eg.db",
-        ont = ont[i],
-        computeIC = computeIC
-      )
+    if (any(!ont %in% c("BP", "CC", "MF"))) {
+        stop('Column go_type does not contain the recognised sub-ontologies, c("BP", "CC", "MF")')
+    }
 
-    # Get unique ont terms from pathway_df
-    terms <-
-      pathway_df %>%
-      dplyr::filter(.data$go_type == ont[i]) %>%
-      .[["go_id"]] %>%
-      unique()
+    go_similarity <-
+        setNames(
+            object =
+                vector(
+                    mode = "list",
+                    length = length(ont)
+                ),
+            nm = ont
+        )
 
-    # Calculate semantic similarity
-    sim <-
-      GOSemSim::mgoSim(
-        GO1 = terms,
-        GO2 = terms,
-        semData = hsGO,
-        measure = measure,
-        combine = NULL
-      )
+    for (i in 1:length(ont)) {
+        print(stringr::str_c("Reducing sub-ontology: ", ont[i]))
 
-    # Reduce terms as based on scores or set size assigned
-    go_similarity[[i]] <-
-      rrvgo::reduceSimMatrix(
-        simMatrix = sim,
-        threshold = threshold,
-        orgdb = "org.Hs.eg.db",
-        scores = scores
-      ) %>%
-      tibble::as_tibble() %>% 
-      dplyr::rename(parent_id = .data$parent,
-                    parent_term = .data$parentTerm,
-                    parent_sim_score = .data$parentSimScore)
-  }
+        hsGO <-
+            GOSemSim::godata(
+                OrgDb = "org.Hs.eg.db",
+                ont = ont[i],
+                computeIC = computeIC
+            )
 
-  go_sim_df <-
-    go_similarity %>%
-    qdapTools::list_df2df(col1 = "go_type")
-  
-  pathway_go_sim_df <-
-    pathway_df %>%
-    dplyr::inner_join(
-      go_sim_df %>%
-        dplyr::select(.data$go_type, 
-                      go_id = .data$go, 
-                      contains("parent")),
-      by = c("go_type", "go_id")
-    ) %>% 
-    dplyr::arrange(.data$go_type, .data$parent_id, -.data$parent_sim_score)
-  
-  return(pathway_go_sim_df)
-  
+        # Get unique ont terms from pathway_df
+        terms <-
+            pathway_df %>%
+            dplyr::filter(.data$go_type == ont[i]) %>%
+            .[["go_id"]] %>%
+            unique()
+
+        # Calculate semantic similarity
+        sim <-
+            GOSemSim::mgoSim(
+                GO1 = terms,
+                GO2 = terms,
+                semData = hsGO,
+                measure = measure,
+                combine = NULL
+            )
+
+        # Reduce terms as based on scores or set size assigned
+        go_similarity[[i]] <-
+            rrvgo::reduceSimMatrix(
+                simMatrix = sim,
+                threshold = threshold,
+                orgdb = "org.Hs.eg.db",
+                scores = scores
+            ) %>%
+            tibble::as_tibble() %>%
+            dplyr::rename(
+                parent_id = .data$parent,
+                parent_term = .data$parentTerm,
+                parent_sim_score = .data$parentSimScore
+            )
+    }
+
+    go_sim_df <-
+        go_similarity %>%
+        qdapTools::list_df2df(col1 = "go_type")
+
+    pathway_go_sim_df <-
+        pathway_df %>%
+        dplyr::inner_join(
+            go_sim_df %>%
+                dplyr::select(.data$go_type,
+                    go_id = .data$go,
+                    contains("parent")
+                ),
+            by = c("go_type", "go_id")
+        ) %>%
+        dplyr::arrange(.data$go_type, .data$parent_id, -.data$parent_sim_score)
+
+    return(pathway_go_sim_df)
 }

@@ -69,24 +69,25 @@ clustering approach), and the tree is cut at the desired threshold. The term
 with the highest "score" is used to represent each group.
 }
 \examples{
-file_path <- 
-  system.file(
-    "testdata", 
-    "go_test_data.txt", 
-    package = "rutils", 
-    mustWork = TRUE
-  )
-  
-pathway_df <- 
-  readr::read_delim(file_path,
-                    delim = "\t")
+file_path <-
+    system.file(
+        "testdata",
+        "go_test_data.txt",
+        package = "rutils",
+        mustWork = TRUE
+    )
+
+pathway_df <-
+    readr::read_delim(file_path,
+        delim = "\t"
+    )
 
 go_reduce(
-  pathway_df = pathway_df,
-  threshold = 0.9,
-  scores = NULL,
-  measure = "Wang")
-  
+    pathway_df = pathway_df,
+    threshold = 0.9,
+    scores = NULL,
+    measure = "Wang"
+)
 }
 \references{
 \itemize{

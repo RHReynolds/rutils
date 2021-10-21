@@ -15,11 +15,10 @@ There is no plan to ever submit this code to `CRAN` or `Bioconductor`. This code
 BiocManager::install("RHReynolds/rutils")
 ```
 
-**Note:** If you are running R (&gt;= 4.0), installation may return the error that `GOSemSim` (v2.16.1) and/or `rrvgo` are not available for your R version. However, these packages do not actually have a dependency on R (&gt;= 4.0) -- the error occurs because these packages cannot be found using your version of BioConductor (which is likely to be &lt; 3.12). A workaround to this issue is to install the development versions of these packages directly from GitHub, using the following command:
+**Note:** If you are running R (&lt; 4.0), installation may return the error that `GOSemSim` (v2.16.1) and/or `rrvgo` are not available for your R version. However, these packages do not actually have a dependency on R (&gt;= 4.0) -- the error occurs because these packages cannot be found using your version of BioConductor (which is likely to be &lt; 3.12). A workaround to this issue is to install the development versions of these packages directly from GitHub, using the following command:
 
 ``` r
-
-# If GOSemSim successfully installed, simply remove from command 
+# If GOSemSim successfully installed, simply remove from command
 remotes::install_github(c("GuangchuangYu/GOSemSim", "ssayols/rrvgo"))
 ```
 
@@ -72,7 +71,7 @@ Please note that the `rutils` project is released with a [Contributor Code of Co
 
 ## Development tools
 
--   Continuous code testing is possible thanks to [GitHub actions](https://www.tidyverse.org/blog/2020/04/usethis-1-6-0/) through *[usethis](https://CRAN.R-project.org/package=usethis)*, *[remotes](https://CRAN.R-project.org/package=remotes)*, and *[rcmdcheck](https://CRAN.R-project.org/package=rcmdcheck)* customized to use [Bioconductor's docker containers](https://www.bioconductor.org/help/docker/) and *[BiocCheck](https://bioconductor.org/packages/3.10/BiocCheck)*.
+-   Continuous code testing is possible thanks to [GitHub actions](https://www.tidyverse.org/blog/2020/04/usethis-1-6-0/) through *[usethis](https://CRAN.R-project.org/package=usethis)*, *[remotes](https://CRAN.R-project.org/package=remotes)*, and *[rcmdcheck](https://CRAN.R-project.org/package=rcmdcheck)* customized to use [Bioconductor's docker containers](https://www.bioconductor.org/help/docker/) and *[BiocCheck](https://bioconductor.org/packages/3.12/BiocCheck)*.
 -   Code coverage assessment is possible thanks to [codecov](https://codecov.io/gh) and *[covr](https://CRAN.R-project.org/package=covr)*.
 -   The [documentation website](http://RHReynolds.github.io/rutils) is automatically updated thanks to *[pkgdown](https://CRAN.R-project.org/package=pkgdown)*.
 -   The code is styled automatically thanks to *[styler](https://CRAN.R-project.org/package=styler)*.
