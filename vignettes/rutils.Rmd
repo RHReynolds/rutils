@@ -95,6 +95,7 @@ A number of different families of functions exist in `rutils`, including:
 
 - GO-related functions, including `go_reduce()` and `go_plot()`.
 - Genomic-related functions, including `liftover_coord()`.
+- Utility functions, including `md5_check()`.
 
 # Reproducibility
 
