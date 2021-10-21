@@ -12,7 +12,7 @@ with the following two columns:
 \itemize{
 \item \code{file_path}: full file path for files for which md5s should be
 generated
-\item \code{file_path}: file name, which should match the file name in the
+\item \code{file_name}: file name, which should match the file name in the
 \code{original_md5} dataframe.
 }}
 
