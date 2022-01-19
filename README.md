@@ -31,7 +31,7 @@ Below is the citation output from using `citation('rutils')` in R. Please run th
 ``` r
 print(citation("rutils"), bibtex = TRUE)
 #> 
-#> RHReynolds (2021). _Common utility functions_. doi:
+#> RHReynolds (2022). _Common utility functions_. doi:
 #> 10.18129/B9.bioc.rutils (URL: https://doi.org/10.18129/B9.bioc.rutils),
 #> https://github.com/RHReynolds/rutils - R package version 0.99.2, <URL:
 #> http://www.bioconductor.org/packages/rutils>.
@@ -41,7 +41,7 @@ print(citation("rutils"), bibtex = TRUE)
 #>   @Manual{,
 #>     title = {Common utility functions},
 #>     author = {{RHReynolds}},
-#>     year = {2021},
+#>     year = {2022},
 #>     url = {http://www.bioconductor.org/packages/rutils},
 #>     note = {https://github.com/RHReynolds/rutils - R package version 0.99.2},
 #>     doi = {10.18129/B9.bioc.rutils},
