@@ -29,6 +29,8 @@
 #'  GO term relates to. Should be one of `c("BP", "CC", "MF")`.
 #'  \item `go_id`: the gene ontology identifier (e.g. GO:0016209)
 #'  }
+#' @param orgdb `character()` vector, indicating name of the org.* Bioconductor
+#'   package to be used
 #' @param threshold `numeric()` vector. Similarity threshold (0-1) for
 #'  \code{rrvgo::\link[rrvgo:reduceSimMatrix]{reduceSimMatrix()}}. Default
 #'  option is 0.7. Some guidance:
@@ -97,14 +99,19 @@
 #'
 #' go_reduce(
 #'     pathway_df = pathway_df,
+#'     orgdb = "org.Hs.eg.db",
 #'     threshold = 0.9,
 #'     scores = NULL,
 #'     measure = "Wang"
 #' )
-go_reduce <- function(pathway_df,
+go_reduce <- 
+  function(
+    pathway_df,
+    orgdb = "org.Hs.eg.db",
     threshold = 0.7,
     scores = NULL,
-    measure = "Wang") {
+    measure = "Wang"
+    ) {
     if (!measure %in% c("Resnik", "Lin", "Rel", "Jiang", "Wang")) {
         stop('Chosen measure is not one of the recognised measures, c("Resnik", "Lin", "Rel", "Jiang", "Wang").')
     }
@@ -141,7 +148,7 @@ go_reduce <- function(pathway_df,
 
         hsGO <-
             GOSemSim::godata(
-                OrgDb = "org.Hs.eg.db",
+                OrgDb = orgdb,
                 ont = ont[i],
                 computeIC = computeIC
             )
@@ -168,7 +175,7 @@ go_reduce <- function(pathway_df,
             rrvgo::reduceSimMatrix(
                 simMatrix = sim,
                 threshold = threshold,
-                orgdb = "org.Hs.eg.db",
+                orgdb = orgdb,
                 scores = scores
             ) %>%
             tibble::as_tibble() %>%

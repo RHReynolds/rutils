@@ -4,7 +4,13 @@
 \alias{go_reduce}
 \title{Reduce redundancy of human GO terms}
 \usage{
-go_reduce(pathway_df, threshold = 0.7, scores = NULL, measure = "Wang")
+go_reduce(
+  pathway_df,
+  orgdb = "org.Hs.eg.db",
+  threshold = 0.7,
+  scores = NULL,
+  measure = "Wang"
+)
 }
 \arguments{
 \item{pathway_df}{a \code{data.frame} or \link[tibble:tbl_df-class]{tibble} object,
@@ -14,6 +20,9 @@ with the following columns:
 GO term relates to. Should be one of \code{c("BP", "CC", "MF")}.
 \item \code{go_id}: the gene ontology identifier (e.g. GO:0016209)
 }}
+
+\item{orgdb}{\code{character()} vector, indicating name of the org.* Bioconductor
+package to be used}
 
 \item{threshold}{\code{numeric()} vector. Similarity threshold (0-1) for
 \code{rrvgo::\link[rrvgo:reduceSimMatrix]{reduceSimMatrix()}}. Default
@@ -84,6 +93,7 @@ pathway_df <-
 
 go_reduce(
     pathway_df = pathway_df,
+    orgdb = "org.Hs.eg.db",
     threshold = 0.9,
     scores = NULL,
     measure = "Wang"
