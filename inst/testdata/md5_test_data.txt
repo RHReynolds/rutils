@@ -1,3 +1,2 @@
 file_name	original_md5
-hg19ToHg38.over.chain	9267c9fef79b54962da8efadd0ddf6b6
-hg38ToHg19.over.chain	97b423dc9095cc322460f0ff7f50c93a
+md5_test_file.txt	d41d8cd98f00b204e9800998ecf8427e

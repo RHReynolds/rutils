@@ -4,14 +4,13 @@ context("Testing md5 check function")
 
 test_data_path <- system.file("testdata", package = "rutils", mustWork = TRUE)
 
+# Test file created by running `touch md5_test_file.txt` in inst/testdata
+# Need test file to have no new line due to differences in line endings on OSs and how this impacts md5 hash
+# https://stackoverflow.com/questions/23829553/different-hash-value-created-on-windows-linux-and-mac-for-same-image
 test_files <-
     tibble::tibble(
         file_path =
-            list.files(
-                test_data_path,
-                pattern = "over.chain",
-                full.names = TRUE
-            )
+          file.path(test_data_path, "md5_test_file.txt")
     ) %>%
     dplyr::mutate(
         file_name = basename(file_path)
