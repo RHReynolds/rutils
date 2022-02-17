@@ -133,7 +133,13 @@ which will reduce a set of GO terms based on their semantic similarity and
 scores (in this case, a default score based on set size is assigned.)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>go_reduce</span><span class='op'>(</span><span class='va'>pathway_df</span>, threshold <span class='op'>=</span> <span class='fl'>0.7</span>, scores <span class='op'>=</span> <span class='cn'>NULL</span>, measure <span class='op'>=</span> <span class='st'>"Wang"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>go_reduce</span><span class='op'>(</span>
+  <span class='va'>pathway_df</span>,
+  orgdb <span class='op'>=</span> <span class='st'>"org.Hs.eg.db"</span>,
+  threshold <span class='op'>=</span> <span class='fl'>0.7</span>,
+  scores <span class='op'>=</span> <span class='cn'>NULL</span>,
+  measure <span class='op'>=</span> <span class='st'>"Wang"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -146,6 +152,11 @@ with the following columns:</p><ul>
 GO term relates to. Should be one of <code><a href='https://rdrr.io/r/base/c.html'>c("BP", "CC", "MF")</a></code>.</p></li>
 <li><p><code>go_id</code>: the gene ontology identifier (e.g. GO:0016209)</p></li>
 </ul></td>
+    </tr>
+    <tr>
+      <th>orgdb</th>
+      <td><p><code><a href='https://rdrr.io/r/base/character.html'>character()</a></code> vector, indicating name of the org.* Bioconductor
+package to be used</p></td>
     </tr>
     <tr>
       <th>threshold</th>
@@ -246,6 +257,7 @@ of similarity matrix</p>
 #&gt; <span class='message'>)</span></div><div class='input'>
 <span class='fu'>go_reduce</span><span class='op'>(</span>
     pathway_df <span class='op'>=</span> <span class='va'>pathway_df</span>,
+    orgdb <span class='op'>=</span> <span class='st'>"org.Hs.eg.db"</span>,
     threshold <span class='op'>=</span> <span class='fl'>0.9</span>,
     scores <span class='op'>=</span> <span class='cn'>NULL</span>,
     measure <span class='op'>=</span> <span class='st'>"Wang"</span>
