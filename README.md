@@ -32,9 +32,9 @@ Below is the citation output from using `citation('rutils')` in R. Please run th
 print(citation("rutils"), bibtex = TRUE)
 #> 
 #> RHReynolds (2022). _Common utility functions_. doi:
-#> 10.18129/B9.bioc.rutils (URL: https://doi.org/10.18129/B9.bioc.rutils),
+#> 10.5281/zenodo.6127446 (URL: https://doi.org/10.5281/zenodo.6127446),
 #> https://github.com/RHReynolds/rutils - R package version 0.99.2, <URL:
-#> http://www.bioconductor.org/packages/rutils>.
+#> https://github.com/RHReynolds/rutils>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -42,24 +42,9 @@ print(citation("rutils"), bibtex = TRUE)
 #>     title = {Common utility functions},
 #>     author = {{RHReynolds}},
 #>     year = {2022},
-#>     url = {http://www.bioconductor.org/packages/rutils},
+#>     url = {https://github.com/RHReynolds/rutils},
 #>     note = {https://github.com/RHReynolds/rutils - R package version 0.99.2},
-#>     doi = {10.18129/B9.bioc.rutils},
-#>   }
-#> 
-#> RHReynolds (2020). "Common utility functions." _bioRxiv_. doi:
-#> 10.1101/TODO (URL: https://doi.org/10.1101/TODO), <URL:
-#> https://www.biorxiv.org/content/10.1101/TODO>.
-#> 
-#> A BibTeX entry for LaTeX users is
-#> 
-#>   @Article{,
-#>     title = {Common utility functions},
-#>     author = {{RHReynolds}},
-#>     year = {2020},
-#>     journal = {bioRxiv},
-#>     doi = {10.1101/TODO},
-#>     url = {https://www.biorxiv.org/content/10.1101/TODO},
+#>     doi = {10.5281/zenodo.6127446},
 #>   }
 ```
 
