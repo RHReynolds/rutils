@@ -12,18 +12,8 @@ c(
             as.person("RHReynolds")
         ),
         year = format(Sys.Date(), "%Y"),
-        url = "http://www.bioconductor.org/packages/rutils",
+        url = "https://github.com/RHReynolds/rutils",
         note = pkgVer('rutils'),
-        doi = '10.18129/B9.bioc.rutils'
-    ),
-    bibentry(bibtype="article",
-        title = "Common utility functions",
-        author = personList(
-            as.person("RHReynolds")
-        ),
-        year = 2020,
-        journal = "bioRxiv",
-        doi = "10.1101/TODO",
-        url = "https://www.biorxiv.org/content/10.1101/TODO"
+        doi = '10.5281/zenodo.6127446'
     )
 )
