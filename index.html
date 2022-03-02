@@ -83,7 +83,7 @@
 <a href="#installation-instructions" class="anchor"></a>Installation instructions</h2>
 <p>There is no plan to ever submit this code to <code>CRAN</code> or <code>Bioconductor</code>. This code was developed for personal use. If you would like to install the development version from <a href="https://github.com/">GitHub</a> you can use the following command:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"RHReynolds/rutils"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"RHReynolds/rutils"</span><span class="op">)</span></code></pre></div>
 <p><strong>Note:</strong> If you are running R (&lt; 4.0), installation may return the error that <code>GOSemSim</code> (v2.16.1) and/or <code>rrvgo</code> are not available for your R version. However, these packages do not actually have a dependency on R (&gt;= 4.0) – the error occurs because these packages cannot be found using your version of BioConductor (which is likely to be &lt; 3.12). A workaround to this issue is to install the development versions of these packages directly from GitHub, using the following command:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># If GOSemSim successfully installed, simply remove from command</span>
