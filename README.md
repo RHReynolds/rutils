@@ -12,7 +12,7 @@ The goal of `rutils` is to house some of my commonly used functions.
 There is no plan to ever submit this code to `CRAN` or `Bioconductor`. This code was developed for personal use. If you would like to install the development version from [GitHub](https://github.com/) you can use the following command:
 
 ``` r
-BiocManager::install("RHReynolds/rutils")
+remotes::install_github("RHReynolds/rutils")
 ```
 
 **Note:** If you are running R (&lt; 4.0), installation may return the error that `GOSemSim` (v2.16.1) and/or `rrvgo` are not available for your R version. However, these packages do not actually have a dependency on R (&gt;= 4.0) -- the error occurs because these packages cannot be found using your version of BioConductor (which is likely to be &lt; 3.12). A workaround to this issue is to install the development versions of these packages directly from GitHub, using the following command:
